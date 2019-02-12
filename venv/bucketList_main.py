@@ -20,9 +20,9 @@ def get_bucketList():
 	for j in goal:
 		j.pop('_id')
 		goals.append(j)
-	return jsonify(items)	
+	return jsonify(goals)	
 
-@app.route('/addItem/<new_goal>', methods=['POST']) #adding new item to bucketlist
+@app.route('/addGoal/<new_goal>', methods=['POST']) #adding new item to bucketlist
 def add_item(new_goal):
 	bucketList = mongo.db.bucketList
 	goal_new = {'name' : new_goal}
