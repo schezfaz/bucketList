@@ -12,6 +12,16 @@ mongo = PyMongo(app)
 def hello_world():
     return 'flask is running correctly'
 
+@app.route('/viewBucketList', methods=['GET']) #viewing all contents of bucketList
+def get_bucketList():
+	bucketList = mongo.db.bucketList
+	items = []
+	item = bucketList.find()
+	for j in item:
+		j.pop('_id')
+		items.append(j)
+	return jsonify(items)	
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
