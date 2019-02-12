@@ -15,27 +15,27 @@ def hello_world():
 @app.route('/viewBucketList', methods=['GET']) #viewing all contents of bucketList
 def get_bucketList():
 	bucketList = mongo.db.bucketList
-	items = []
-	item = bucketList.find()
-	for j in item:
+	goals = []
+	goal = bucketList.find()
+	for j in goal:
 		j.pop('_id')
-		items.append(j)
+		goals.append(j)
 	return jsonify(items)	
 
-@app.route('/addItem/<new_item>', methods=['POST']) #adding new item to bucketlist
-def add_item(new_item):
+@app.route('/addItem/<new_goal>', methods=['POST']) #adding new item to bucketlist
+def add_item(new_goal):
 	bucketList = mongo.db.bucketList
-	item_new = {'name' : new_item}
-	if bucketList.find({'name' : new_item}).count() > 0:
+	goal_new = {'name' : new_goal}
+	if bucketList.find({'name' : new_goal}).count() > 0:
 		return "Item Already Exists!"
 	else:
-		bucketList.insert(item_new)
+		bucketList.insert(goal_new)
 		return "Added item successfully"
 
-@app.route('/delete/<item_name>', methods=['GET']) #function to delete one item on bucketlist
-def delete_item(item_name):
+@app.route('/delete/<goal_name>', methods=['GET']) #function to delete one item on bucketlist
+def delete_item(goal_name):
 	bucketList = mongo.db.bucketList
-	bucketList.remove({'name': item_name})
+	bucketList.remove({'name': goal_name})
 	return "Item deleted successfully!"
 
 
