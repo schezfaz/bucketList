@@ -32,6 +32,13 @@ def add_item(new_item):
 		bucketList.insert(item_new)
 		return "Added item successfully"
 
+@app.route('/delete/<item_name>', methods=['GET']) #function to delete one item on bucketlist
+def delete_item(item_name):
+	bucketList = mongo.db.bucketList
+	bucketList.remove({'name': item_name})
+	return "Item deleted successfully!"
+
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
