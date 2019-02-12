@@ -27,16 +27,16 @@ def add_item(new_goal):
 	bucketList = mongo.db.bucketList
 	goal_new = {'name' : new_goal}
 	if bucketList.find({'name' : new_goal}).count() > 0:
-		return "Item Already Exists!"
+		return "Goal Already Exists!"
 	else:
 		bucketList.insert(goal_new)
-		return "Added item successfully"
+		return "Added Goal successfully"
 
 @app.route('/delete/<goal_name>', methods=['GET']) #function to delete one item on bucketlist
 def delete_item(goal_name):
 	bucketList = mongo.db.bucketList
 	bucketList.remove({'name': goal_name})
-	return "Item deleted successfully!"
+	return "Goal deleted successfully!"
 
 
 if __name__ == "__main__":
