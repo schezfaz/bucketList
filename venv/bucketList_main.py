@@ -22,6 +22,16 @@ def get_bucketList():
 		items.append(j)
 	return jsonify(items)	
 
+@app.route('/addItem/<new_item>', methods=['POST']) #adding new item to bucketlist
+def add_item(new_item):
+	bucketList = mongo.db.bucketList
+	item_new = {'name' : new_item}
+	if bucketList.find({'name' : new_item}).count() > 0:
+		return "Item Already Exists!"
+	else:
+		bucketList.insert(item_new)
+		return "Added item successfully"
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
